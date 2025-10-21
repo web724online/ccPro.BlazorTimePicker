@@ -1,0 +1,85 @@
+﻿@typeparam T
+@using System.Globalization
+
+<div class="ccpro-timepicker">
+    <input type="time"
+           class="@CssClass"
+           value="@DisplayValue"
+           @oninput="OnInputChanged"
+           step="@StepValue" />
+</div>
+
+@code {
+    // ---------------------------
+    // Generic parameter
+    // ---------------------------
+    [Parameter] public T? Value { get; set; }
+    [Parameter] public EventCallback<T?> ValueChanged { get; set; }
+
+    // CSS
+    [Parameter] public string CssClass { get; set; } = "form-control";
+
+    // Step in seconds
+    [Parameter] public int Step { get; set; } = 60;
+    private string StepValue => Step.ToString(CultureInfo.InvariantCulture);
+
+    // ---------------------------
+    // Display value
+    // ---------------------------
+
+    private string DisplayValue
+    {
+        get
+        {
+            if (Value == null) return "";
+
+            return typeof(T) switch
+            {
+                Type t when t == typeof(string) => (string)(object)Value!,
+                Type t when t == typeof(TimeSpan) || t == typeof(TimeSpan?) =>
+                    new DateTime(ConvertToTimeSpan(Value!).Ticks).ToString("HH:mm"),
+                Type t when t == typeof(TimeOnly) || t == typeof(TimeOnly?) =>
+                    ((TimeOnly)(object)Value!).ToString("HH:mm"),
+                _ => ""
+            };
+        }
+    }
+
+    // ---------------------------
+    // Input changed
+    // ---------------------------
+
+    private async Task OnInputChanged(ChangeEventArgs e)
+    {
+        var input = e.Value?.ToString();
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            await ValueChanged.InvokeAsync(default);
+            return;
+        }
+
+        if (TimeSpan.TryParse(input, out var ts))
+        {
+            T? newValue = typeof(T) switch
+            {
+                Type t when t == typeof(string) => (T)(object)input,
+                Type t when t == typeof(TimeSpan) || t == typeof(TimeSpan?) => (T)(object)ts,
+                Type t when t == typeof(TimeOnly) || t == typeof(TimeOnly?) => (T)(object)new TimeOnly(ts.Hours, ts.Minutes),
+                _ => default
+            };
+
+            await ValueChanged.InvokeAsync(newValue);
+        }
+    }
+
+    private static TimeSpan ConvertToTimeSpan(object value)
+    {
+        return value switch
+        {
+            TimeSpan ts => ts,
+            TimeOnly to => new TimeSpan(to.Hour, to.Minute, 0),
+            _ => TimeSpan.Zero
+        };
+    }
+}

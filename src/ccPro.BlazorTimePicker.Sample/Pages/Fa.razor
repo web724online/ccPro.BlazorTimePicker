@@ -1,0 +1,119 @@
+﻿@page "/fa"
+@using ccPro.BlazorTimePicker
+
+<div class="container-fluid">
+    <h1 class="mb-4">
+        دموی کامپوننت تایم پیکر جنریک ccPro
+    </h1>
+    <!-- ========================= -->
+    <!-- 1️⃣ String Binding -->
+    <!-- ========================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>1. String Binding</strong>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">این حالت مقدار ساعت را به صورت <code>string</code> (مثلا "09:30") بایند می‌کند. می‌تواند nullable باشد.</p>
+            <div class="mb-3">
+                <label class="form-label">Time (string)</label>
+                <TimePicker T="string" @bind-Value="timeString" CssClass="form-control" Step="60" />
+            </div>
+            <p>Selected string: <code>@timeString</code></p>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 2️⃣ TimeSpan Non-nullable -->
+    <!-- ========================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>2. TimeSpan Non-nullable</strong>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">مقدار ساعت به صورت <code>TimeSpan</code> غیر-nullable ذخیره می‌شود. همیشه مقدار پیش‌فرض دارد.</p>
+            <div class="mb-3">
+                <label class="form-label">Time (TimeSpan)</label>
+                <TimePicker T="TimeSpan" @bind-Value="timeSpanNonNull" CssClass="form-control" Step="60" />
+            </div>
+            <p>Selected TimeSpan: <code>@timeSpanNonNull</code></p>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 3️⃣ TimeSpan Nullable -->
+    <!-- ========================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>3. TimeSpan Nullable</strong>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">مقدار ساعت به صورت <code>TimeSpan?</code> ذخیره می‌شود و می‌تواند null باشد.</p>
+            <div class="mb-3">
+                <label class="form-label">Time (TimeSpan?)</label>
+                <TimePicker T="TimeSpan ?" @bind-Value="timeSpanNullable" CssClass="form-control" Step="60" />
+            </div>
+            <p>Selected TimeSpan?: <code>@(timeSpanNullable?.ToString() ?? "null")</code></p>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 4️⃣ TimeOnly Non-nullable -->
+    <!-- ========================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>4. TimeOnly Non-nullable</strong>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">مقدار ساعت به صورت <code>TimeOnly</code> غیر-nullable ذخیره می‌شود.</p>
+            <div class="mb-3">
+                <label class="form-label">Time (TimeOnly)</label>
+                <TimePicker T="TimeOnly" @bind-Value="timeOnlyNonNull" CssClass="form-control" Step="60" />
+            </div>
+            <p>Selected TimeOnly: <code>@timeOnlyNonNull</code></p>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 5️⃣ TimeOnly Nullable -->
+    <!-- ========================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>5. TimeOnly Nullable</strong>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">مقدار ساعت به صورت <code>TimeOnly?</code> ذخیره می‌شود و می‌تواند null باشد.</p>
+            <div class="mb-3">
+                <label class="form-label">Time (TimeOnly?)</label>
+                <TimePicker T="TimeOnly ?" @bind-Value="timeOnlyNullable" CssClass="form-control" Step="60" />
+            </div>
+            <p>Selected TimeOnly?: <code>@(timeOnlyNullable?.ToString() ?? "null")</code></p>
+        </div>
+    </div>
+</div>
+
+@code {
+    // ---------------------------
+    // 1️⃣ String
+    // ---------------------------
+    private string? timeString = "09:30";
+
+    // ---------------------------
+    // 2️⃣ TimeSpan Non-nullable
+    // ---------------------------
+    private TimeSpan timeSpanNonNull = new TimeSpan(10, 15, 0);
+
+    // ---------------------------
+    // 3️⃣ TimeSpan Nullable
+    // ---------------------------
+    private TimeSpan? timeSpanNullable = null;
+
+    // ---------------------------
+    // 4️⃣ TimeOnly Non-nullable
+    // ---------------------------
+    private TimeOnly timeOnlyNonNull = new TimeOnly(11, 45);
+
+    // ---------------------------
+    // 5️⃣ TimeOnly Nullable
+    // ---------------------------
+    private TimeOnly? timeOnlyNullable = null;
+}
