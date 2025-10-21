@@ -24,13 +24,11 @@ It works in **Blazor WebAssembly** and **Blazor Server**, fully supporting two-w
 - Step property controls input granularity (seconds)
 
 ### Installation
-Install via NuGet (after publishing):
+Install via NuGet:
 
 ```
 Install-Package ccPro.BlazorTimePicker
 ```
-
-Or reference the project locally.
 
 ### Usage Examples
 
@@ -80,7 +78,7 @@ Or reference the project locally.
 ```
 
 ### License
-MIT License. See the LICENSE file.
+MIT License.
 
 ---
 
@@ -103,13 +101,11 @@ MIT License. See the LICENSE file.
 - قابلیت تنظیم `Step` برای دقت انتخاب زمان (بر حسب ثانیه)
 
 ### نصب
-از طریق NuGet (پس از انتشار) نصب کنید:
+از طریق NuGet نصب کنید:
 
 ```
 Install-Package ccPro.BlazorTimePicker
 ```
-
-یا پروژه را به صورت محلی ارجاع دهید.
 
 ### نمونه استفاده
 
@@ -159,4 +155,4 @@ Install-Package ccPro.BlazorTimePicker
 ```
 
 ### لایسنس
-MIT License. فایل LICENSE را مشاهده کنید.
+MIT License.
