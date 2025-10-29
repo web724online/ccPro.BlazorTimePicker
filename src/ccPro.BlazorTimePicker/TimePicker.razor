@@ -2,23 +2,21 @@
 @using System.Globalization
 @using Microsoft.JSInterop
 
-<div class="ccpro-timepicker">
-    <input id="@ElementId"
-           @ref="_inputRef"
-           type="time"
-           class="@CssClass"
-           value="@DisplayValue"
-           @oninput="OnInputChanged"
-           step="@StepValue"
-           @onfocus="OnFocus" />
-</div>
+<input id="@ElementId"
+       @ref="_inputRef"
+       type="time"
+       class="ccpro-timepicker @CssClass"
+       value="@DisplayValue"
+       @oninput="OnInputChanged"
+       step="@StepValue"
+       @onfocus="OnFocus" />
 
 @inject IJSRuntime JS
 @code {
     private ElementReference _inputRef;
     private IJSObjectReference? _module;
 
-    [Parameter] public string ElementId { get; set; } = $"timepicker_{Guid.NewGuid().ToString().Replace("-","")}";
+    [Parameter] public string ElementId { get; set; } = $"timepicker_{Guid.NewGuid().ToString().Replace("-", "")}";
     // ---------------------------
     // Generic parameter
     // ---------------------------
