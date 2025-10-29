@@ -8,7 +8,7 @@
 
 		<!-- Package Info -->
 		<PackageId>ccPro.BlazorTimePicker</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>ccPro</Authors>
 		<Company>ccPro</Company>
 		<Description>Generic TimePicker component for Blazor supporting string, TimeSpan, TimeOnly</Description>
@@ -20,8 +20,14 @@
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.36" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="wwwroot\js\ccPro.BlazorTimePicker.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+
 </Project>

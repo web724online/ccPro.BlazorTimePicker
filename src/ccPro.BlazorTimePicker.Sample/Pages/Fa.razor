@@ -16,7 +16,7 @@
             <p class="text-muted">این حالت مقدار ساعت را به صورت <code>string</code> (مثلا "09:30") بایند می‌کند. می‌تواند nullable باشد.</p>
             <div class="mb-3">
                 <label class="form-label">Time (string)</label>
-                <TimePicker T="string" @bind-Value="timeString" CssClass="form-control" Step="60" />
+                <TimePicker T="string" @bind-Value="timeString" CssClass="form-control" Step="60"/>
             </div>
             <p>Selected string: <code>@timeString</code></p>
         </div>
@@ -33,7 +33,7 @@
             <p class="text-muted">مقدار ساعت به صورت <code>TimeSpan</code> غیر-nullable ذخیره می‌شود. همیشه مقدار پیش‌فرض دارد.</p>
             <div class="mb-3">
                 <label class="form-label">Time (TimeSpan)</label>
-                <TimePicker T="TimeSpan" @bind-Value="timeSpanNonNull" CssClass="form-control" Step="60" />
+                <TimePicker T="TimeSpan" @bind-Value="timeSpanNonNull" CssClass="form-control" />
             </div>
             <p>Selected TimeSpan: <code>@timeSpanNonNull</code></p>
         </div>
@@ -50,7 +50,7 @@
             <p class="text-muted">مقدار ساعت به صورت <code>TimeSpan?</code> ذخیره می‌شود و می‌تواند null باشد.</p>
             <div class="mb-3">
                 <label class="form-label">Time (TimeSpan?)</label>
-                <TimePicker T="TimeSpan ?" @bind-Value="timeSpanNullable" CssClass="form-control" Step="60" />
+                <TimePicker T="TimeSpan ?" @bind-Value="timeSpanNullable" CssClass="form-control" />
             </div>
             <p>Selected TimeSpan?: <code>@(timeSpanNullable?.ToString() ?? "null")</code></p>
         </div>
@@ -67,7 +67,7 @@
             <p class="text-muted">مقدار ساعت به صورت <code>TimeOnly</code> غیر-nullable ذخیره می‌شود.</p>
             <div class="mb-3">
                 <label class="form-label">Time (TimeOnly)</label>
-                <TimePicker T="TimeOnly" @bind-Value="timeOnlyNonNull" CssClass="form-control" Step="60" />
+                <TimePicker T="TimeOnly" @bind-Value="timeOnlyNonNull" CssClass="form-control" />
             </div>
             <p>Selected TimeOnly: <code>@timeOnlyNonNull</code></p>
         </div>
@@ -84,7 +84,7 @@
             <p class="text-muted">مقدار ساعت به صورت <code>TimeOnly?</code> ذخیره می‌شود و می‌تواند null باشد.</p>
             <div class="mb-3">
                 <label class="form-label">Time (TimeOnly?)</label>
-                <TimePicker T="TimeOnly ?" @bind-Value="timeOnlyNullable" CssClass="form-control" Step="60" />
+                <TimePicker T="TimeOnly ?" @bind-Value="timeOnlyNullable" CssClass="form-control" />
             </div>
             <p>Selected TimeOnly?: <code>@(timeOnlyNullable?.ToString() ?? "null")</code></p>
         </div>

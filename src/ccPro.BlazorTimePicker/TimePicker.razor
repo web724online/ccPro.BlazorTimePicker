@@ -1,15 +1,24 @@
 ﻿@typeparam T
 @using System.Globalization
+@using Microsoft.JSInterop
 
 <div class="ccpro-timepicker">
-    <input type="time"
+    <input id="@ElementId"
+           @ref="_inputRef"
+           type="time"
            class="@CssClass"
            value="@DisplayValue"
            @oninput="OnInputChanged"
-           step="@StepValue" />
+           step="@StepValue"
+           @onfocus="OnFocus" />
 </div>
 
+@inject IJSRuntime JS
 @code {
+    private ElementReference _inputRef;
+    private IJSObjectReference? _module;
+
+    [Parameter] public string ElementId { get; set; } = $"timepicker_{Guid.NewGuid().ToString().Replace("-","")}";
     // ---------------------------
     // Generic parameter
     // ---------------------------
@@ -48,7 +57,14 @@
     // ---------------------------
     // Input changed
     // ---------------------------
-
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/ccPro.BlazorTimePicker/js/ccPro.BlazorTimePicker.js");
+        }
+    }
     private async Task OnInputChanged(ChangeEventArgs e)
     {
         var input = e.Value?.ToString();
@@ -81,5 +97,18 @@
             TimeOnly to => new TimeSpan(to.Hour, to.Minute, 0),
             _ => TimeSpan.Zero
         };
+    }
+
+    private async Task OnFocus()
+    {
+        // await JS.InvokeVoidAsync("showTimePicker", "timeInput");
+        if (_module != null)
+            await _module.InvokeVoidAsync("ccproShowTimePicker", _inputRef);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_module != null)
+            await _module.DisposeAsync();
     }
 }
