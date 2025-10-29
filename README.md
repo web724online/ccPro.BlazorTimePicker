@@ -30,6 +30,12 @@ Install via NuGet:
 Install-Package ccPro.BlazorTimePicker
 ```
 
+Install via CLI:
+
+```
+dotnet add package ccPro.BlazorTimePicker
+```
+
 ### Usage Examples
 
 **String Binding**
